@@ -9,5 +9,5 @@ package NatureReserveSimulationSolution.Animals;
  * @author Erasmus1
  */
 public enum AnimalsRegister {
-    
+    Lion ,Elephant, Owl, Turtle, Whale, Shark, Frog, Crocodile
 }
