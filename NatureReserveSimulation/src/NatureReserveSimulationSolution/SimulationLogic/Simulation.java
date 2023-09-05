@@ -5,8 +5,10 @@
 package NatureReserveSimulationSolution.SimulationLogic;
 
 import NatureReserveSimulationSolution.Animals.*;
+import NatureReserveSimulationSolution.Food.Food;
 import NatureReserveSimulationSolution.Statistics.Statistics;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 /**
@@ -14,16 +16,17 @@ import java.util.Random;
  * @author Erasmus1
  */
 public class Simulation {
-    
-    private ArrayList<Animal> animals;
-    private Statistics statistics;
+
+    private final ArrayList<Animal> animals;
+    private final Statistics statistics;
+    private int lifespan = 0;
 
     public Simulation(int numAnimals) {
         animals = new ArrayList();
-        statistics = new Statistics();
+        statistics = new Statistics(numAnimals);
         createRandomAnimals(numAnimals);
     }
-    
+
     private void createRandomAnimals(int numAnimals) {
         Random random = new Random();
         for (int i = 0; i < numAnimals; i++) {
@@ -60,19 +63,31 @@ public class Simulation {
             animals.add(animal);
         }
     }
-    
-    public void runSimulation() {
+
+    public void runSimulation(ArrayList<Food> foodList) {
         Random random = new Random();
-        for (int turn = 1; turn <= maxTurns; turn++) {
-            for (Animal animal : animals) {
-                int foodType = random.nextInt(12);
-                
-                // Aggiorna la durata della vita dell'animale
-                int lifespan = /* calcola la durata della vita */;
-                statistics.updateStatistics(lifespan);
+
+        while (!animals.isEmpty()) {        
+            Iterator<Animal> iteratorAnimals = animals.iterator();
+            while (iteratorAnimals.hasNext()) {
+                Animal animal = iteratorAnimals.next();
+                int randomIndex = random.nextInt(foodList.size());
+                Food randomFood = foodList.get(randomIndex);
+                if (animal.isInDiet(randomFood)) {
+                    animal.increaseEnergy(randomFood);
+                } else {
+                    animal.decreaseEnergy(randomFood);
+                }
+
+                if (animal.getCurrEnergy() <= 0) {
+                    iteratorAnimals.remove();
+                    Statistics.updateStatistics(lifespan);
+                }
             }
+            lifespan++;
         }
-        statistics.calculateAverage(animals.size());
-    } 
-    
+        statistics.calcAverageLifespan();
+        System.out.println(statistics.toString());
+    }
+
 }

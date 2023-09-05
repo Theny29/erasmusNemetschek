@@ -23,6 +23,10 @@ public class Main {
     public static void main(String[] args) {
 
         ArrayList<Animal> animals = new ArrayList<>();
+        ArrayList<Food> food = new ArrayList<>();
+        
+        int numAnimals = 2;
+        Simulation zooSofia = new Simulation(numAnimals);
         
         Food meat = new Food(FoodRegister.Meat, 20);
         Food leaf = new Food(FoodRegister.Leaf, 10);
@@ -36,6 +40,22 @@ public class Main {
         Food fish = new Food(FoodRegister.Fish, 15);
         Food squid = new Food(FoodRegister.Squid, 20);
         Food snake = new Food(FoodRegister.Snake, 15);
+        
+        food.add(meat);
+        food.add(leaf);
+        food.add(grass);
+        food.add(flower);
+        food.add(mouse);
+        food.add(bird);
+        food.add(insect);
+        food.add(berry);
+        food.add(plankton);
+        food.add(fish);
+        food.add(squid);
+        food.add(snake);
+        
+        zooSofia.runSimulation(food);
+        
 
     }
 

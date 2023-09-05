@@ -5,23 +5,23 @@
 package NatureReserveSimulationSolution.Animals;
 
 import NatureReserveSimulationSolution.Food.*;
-import java.util.ArrayList;
+import NatureReserveSimulationSolution.SimulationLogic.Simulation;
 
 /**
  *
  * @author Daniele Perottoni
  */
 public class Animal {
-    
+
     private AnimalsRegister name;
     private Food[] diet;
     private int maxEnergy;
     private int currEnergy;
 
-    public Animal(AnimalsRegister name, int maxEnergy, Food[] diet) {
-        this.setName(name);
-        this.setDiet(diet);
-        this.setMaxEnergy(maxEnergy);
+    public Animal(AnimalsRegister name, int maxEnergy, final Food[] diet) {
+        this.name = name;
+        this.diet = diet;
+        this.maxEnergy = maxEnergy;
         this.currEnergy = maxEnergy;
     }
 
@@ -58,11 +58,24 @@ public class Animal {
     }
 
     public boolean isInDiet(Food food) {
-        boolean isInDiet;
-        if(this.getDiet().contains(food)) this.setCurrEnergy(getCurrEnergy() + food.getNutritionValue());
-        else this.setCurrEnergy(getCurrEnergy() - food.getNutritionValue());
+        boolean isInDiet = false;
+        for (Food item : diet) {
+            if (item.equals(food)) {
+                isInDiet = true;
+            }
+        }
         return isInDiet;
     }
-    
-    
+
+    public void increaseEnergy(Food food) {
+        setCurrEnergy(currEnergy + food.getNutritionValue());
+        if (currEnergy > maxEnergy) {
+            currEnergy = maxEnergy;
+        }
+    }
+
+    public void decreaseEnergy(Food food) {
+        setCurrEnergy(currEnergy - food.getNutritionValue());
+    }
+
 }
