@@ -69,19 +69,23 @@ public class Simulation {
 
         while (!animals.isEmpty()) {        
             Iterator<Animal> iteratorAnimals = animals.iterator();
+            //System.out.println("DAY: " + lifespan + "\n---------------");
             while (iteratorAnimals.hasNext()) {
                 Animal animal = iteratorAnimals.next();
                 int randomIndex = random.nextInt(foodList.size());
                 Food randomFood = foodList.get(randomIndex);
                 if (animal.isInDiet(randomFood)) {
                     animal.increaseEnergy(randomFood);
+                    //System.out.println(animal.getName().toString().toUpperCase() + " ate " + randomFood.getName() + " and gained " + randomFood.getNutritionValue() + " energy. ENERGY: " + animal.getCurrEnergy() + "\n");
                 } else {
                     animal.decreaseEnergy(randomFood);
+                    //System.out.println(animal.getName().toString().toUpperCase() + " ate " + randomFood.getName() + " and lost 1 energy\n");
                 }
-
+                if (animal.getCurrEnergy() <= (animal.getMaxEnergy()/ 2)) System.out.println(animal.getVerse());
                 if (animal.getCurrEnergy() <= 0) {
+                    Statistics.updateStatistics(lifespan, animal.getName());
+                    System.out.println(animal.getName().toString().toUpperCase() + " is dead");
                     iteratorAnimals.remove();
-                    Statistics.updateStatistics(lifespan);
                 }
             }
             lifespan++;

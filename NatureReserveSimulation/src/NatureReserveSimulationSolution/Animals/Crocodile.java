@@ -5,7 +5,6 @@
 package NatureReserveSimulationSolution.Animals;
 
 import NatureReserveSimulationSolution.Food.*;
-import java.util.ArrayList;
 
 /**
  *
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 public class Crocodile extends Animal{
     
     public Crocodile() {
-        super(AnimalsRegister.Crocodile, 150, new Food[]{new Food(FoodRegister.Snake, 15), new Food(FoodRegister.Bird, 15)});
+        super(AnimalsRegister.Crocodile, 54, new Food[]{new Food(FoodRegister.Fish, 10), new Food(FoodRegister.Bird, 5), new Food(FoodRegister.Snake, 5)}, "STRIKGNAK");
     }
        
 }

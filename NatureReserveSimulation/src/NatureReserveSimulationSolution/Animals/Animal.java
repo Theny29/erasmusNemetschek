@@ -5,7 +5,6 @@
 package NatureReserveSimulationSolution.Animals;
 
 import NatureReserveSimulationSolution.Food.*;
-import NatureReserveSimulationSolution.SimulationLogic.Simulation;
 
 /**
  *
@@ -17,12 +16,14 @@ public class Animal {
     private Food[] diet;
     private int maxEnergy;
     private int currEnergy;
+    private String verse;
 
-    public Animal(AnimalsRegister name, int maxEnergy, final Food[] diet) {
+    public Animal(AnimalsRegister name, int maxEnergy, final Food[] diet, String verse) {
         this.name = name;
         this.diet = diet;
         this.maxEnergy = maxEnergy;
         this.currEnergy = maxEnergy;
+        this.verse = verse;
     }
 
     public AnimalsRegister getName() {
@@ -57,6 +58,14 @@ public class Animal {
         this.diet = diet;
     }
 
+    public String getVerse() {
+        return verse;
+    }
+
+    public void setVerse(String verse) {
+        this.verse = verse;
+    }
+
     public boolean isInDiet(Food food) {
         boolean isInDiet = false;
         for (Food item : diet) {
@@ -75,7 +84,7 @@ public class Animal {
     }
 
     public void decreaseEnergy(Food food) {
-        setCurrEnergy(currEnergy - food.getNutritionValue());
+        setCurrEnergy(currEnergy-1);
     }
 
 }

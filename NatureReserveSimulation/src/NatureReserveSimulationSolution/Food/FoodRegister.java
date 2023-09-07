@@ -9,5 +9,5 @@ package NatureReserveSimulationSolution.Food;
  * @author Erasmus1
  */
 public enum FoodRegister {
-    Meat, Leaf, Grass, Flower, Mouse, Bird, Insect, Berry, Plankton, Fish, Squid, Snake
+    Meat, Leaf, Grass, Flower, Mouse, Bird, Insect, Berry, Plankton, Fish, Squid, Snake, seaGrass, Worms, Crustacean
 }

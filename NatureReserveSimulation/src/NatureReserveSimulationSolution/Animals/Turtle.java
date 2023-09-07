@@ -5,7 +5,6 @@
 package NatureReserveSimulationSolution.Animals;
 
 import NatureReserveSimulationSolution.Food.*;
-import java.util.ArrayList;
 
 /**
  *
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 public class Turtle extends Animal{
     
     public Turtle() {
-        super(AnimalsRegister.Turtle, 50, new Food[]{new Food(FoodRegister.Grass, 5), new Food(FoodRegister.Flower, 5), new Food(FoodRegister.Berry, 10)});
+        super(AnimalsRegister.Turtle, 78, new Food[]{new Food(FoodRegister.Grass, 3), new Food(FoodRegister.Flower, 5), new Food(FoodRegister.Berry, 8)}, "MHHH");
     }
     
 }

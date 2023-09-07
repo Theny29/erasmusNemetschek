@@ -5,7 +5,6 @@
 package NatureReserveSimulationSolution.Animals;
 
 import NatureReserveSimulationSolution.Food.*;
-import java.util.ArrayList;
 
 /**
  *
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 public class Whale extends Animal{
     
     public Whale() {
-        super(AnimalsRegister.Whale, 100, new Food[]{new Food(FoodRegister.Plankton, 10)});
+        super(AnimalsRegister.Whale, 80, new Food[]{new Food(FoodRegister.Plankton, 10), new Food(FoodRegister.Fish, 10)}, "IL COCCODRILLO COME FA");
     }
     
 }

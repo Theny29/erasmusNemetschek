@@ -5,6 +5,7 @@
 package NatureReserveSimulationSolution.Statistics;
 
 import NatureReserveSimulationSolution.Animals.Animal;
+import NatureReserveSimulationSolution.Animals.AnimalsRegister;
 import java.util.ArrayList;
 
 /**
@@ -15,6 +16,8 @@ public final class Statistics {
     
     private static int minimum;
     private static int maximum;
+    private static String firstAnimal;
+    private static String lastAnimal;
     private double average;
     private int numAnimals;
     private static ArrayList<Integer> lifespanStorage;
@@ -50,15 +53,17 @@ public final class Statistics {
         this.average = average;
     }
     
-    public static void updateStatistics(int lifespan) {
+    public static void updateStatistics(int lifespan, AnimalsRegister animal) {
         lifespanStorage.add(lifespan);
         
         for (int number : lifespanStorage) {
             if (number < minimum) {
                 minimum = number;
+                firstAnimal = animal.name();
             }
             if (number > maximum) {
                 maximum = number;
+                lastAnimal = animal.name();
             }
         }
     }
@@ -71,7 +76,7 @@ public final class Statistics {
 
     @Override
     public String toString() {
-        return "STATISTICS:\n" + "minium = " + minimum + ", maximum = " + maximum + ", average = " + average;
+        return "\nSTATISTICS:\n" + "minium = " + minimum + " animal: " + firstAnimal + "\nmaximum = " + maximum + " animal: " + lastAnimal +"\naverage = " + average;
     }
     
     

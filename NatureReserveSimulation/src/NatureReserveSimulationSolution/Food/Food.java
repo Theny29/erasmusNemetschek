@@ -33,6 +33,24 @@ public class Food {
     public void setNutritionValue(int nutritionValue) {
         this.nutritionValue = nutritionValue;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Food other = (Food) obj;
+        if (this.nutritionValue != other.nutritionValue) {
+            return false;
+        }
+        return this.name == other.name;
+    }
     
     
     
