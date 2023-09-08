@@ -13,7 +13,15 @@ import NatureReserveSimulationSolution.Food.*;
 public class Shark extends Animal{
     
     public Shark() {
-        super(AnimalsRegister.Shark, 48, new Food[]{new Food(FoodRegister.Fish, 10), new Food(FoodRegister.Crustacean, 5), new Food(FoodRegister.Squid, 5)}, "GNAM");
+        super(AnimalsRegister.Shark, 144, 30, "GNAM");
+        diet.add(new Food(FoodRegister.Fish, 10));
+        diet.add(new Food(FoodRegister.Crustacean, 5));
+
+    }
+    
+    @Override
+    public void foodToAdd() {
+        diet.add(new Food(FoodRegister.Squid, 5));
     }
     
 }

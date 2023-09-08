@@ -13,7 +13,14 @@ import NatureReserveSimulationSolution.Food.*;
 public class Whale extends Animal{
     
     public Whale() {
-        super(AnimalsRegister.Whale, 80, new Food[]{new Food(FoodRegister.Plankton, 10), new Food(FoodRegister.Fish, 10)}, "IL COCCODRILLO COME FA");
+        super(AnimalsRegister.Whale, 240, 70, "IL COCCODRILLO COME FA");
+        diet.add(new Food(FoodRegister.Plankton, 10));
+
+    }
+    
+    @Override
+    public void foodToAdd() {
+        diet.add(new Food(FoodRegister.Fish, 10));
     }
     
 }

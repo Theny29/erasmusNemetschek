@@ -5,25 +5,30 @@
 package NatureReserveSimulationSolution.Animals;
 
 import NatureReserveSimulationSolution.Food.*;
+import java.util.ArrayList;
 
 /**
  *
  * @author Daniele Perottoni
  */
-public class Animal {
+public abstract class Animal {
 
     private AnimalsRegister name;
-    private Food[] diet;
+    protected ArrayList<Food> diet;
     private int maxEnergy;
     private int currEnergy;
     private String verse;
+    private int currentAge;
+    private int maxAge;
 
-    public Animal(AnimalsRegister name, int maxEnergy, final Food[] diet, String verse) {
+    public Animal(AnimalsRegister name, int maxEnergy, int maxAge, String verse) {
         this.name = name;
-        this.diet = diet;
+        this.maxAge = maxAge;
         this.maxEnergy = maxEnergy;
         this.currEnergy = maxEnergy;
         this.verse = verse;
+        this.diet = new ArrayList<>();
+        this.currentAge = 0;
     }
 
     public AnimalsRegister getName() {
@@ -50,11 +55,11 @@ public class Animal {
         this.currEnergy = currEnergy;
     }
 
-    public Food[] getDiet() {
+    public ArrayList<Food> getDiet() {
         return diet;
     }
 
-    public void setDiet(Food[] diet) {
+    public void setDiet(ArrayList<Food> diet) {
         this.diet = diet;
     }
 
@@ -65,6 +70,24 @@ public class Animal {
     public void setVerse(String verse) {
         this.verse = verse;
     }
+
+    public int getCurrentAge() {
+        return currentAge;
+    }
+
+    public void setCurrentAge(int currentAge) {
+        this.currentAge = currentAge;
+    }
+
+    public int getMaxAge() {
+        return maxAge;
+    }
+
+    public void setMaxAge(int maxAge) {
+        this.maxAge = maxAge;
+    }
+    
+    
 
     public boolean isInDiet(Food food) {
         boolean isInDiet = false;
@@ -86,5 +109,7 @@ public class Animal {
     public void decreaseEnergy(Food food) {
         setCurrEnergy(currEnergy-1);
     }
+    
+    public abstract void foodToAdd();
 
 }

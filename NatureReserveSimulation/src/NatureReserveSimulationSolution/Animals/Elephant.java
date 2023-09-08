@@ -13,7 +13,14 @@ import NatureReserveSimulationSolution.Food.*;
 public class Elephant extends Animal{
     
     public Elephant() {
-        super(AnimalsRegister.Elephant, 73, new Food[]{new Food(FoodRegister.Leaf, 5), new Food(FoodRegister.Berry, 8), new Food(FoodRegister.Grass, 3)}, "PFFF");
+        super(AnimalsRegister.Elephant, 219, 70, "PFFF");
+        diet.add(new Food(FoodRegister.Berry, 8));
+        diet.add(new Food(FoodRegister.Leaf, 5));
+    }
+    
+    @Override
+    public void foodToAdd(){
+        diet.add(new Food(FoodRegister.Grass, 3));
     }
     
 }

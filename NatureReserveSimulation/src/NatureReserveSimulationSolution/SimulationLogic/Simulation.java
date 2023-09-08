@@ -72,6 +72,9 @@ public class Simulation {
             //System.out.println("DAY: " + lifespan + "\n---------------");
             while (iteratorAnimals.hasNext()) {
                 Animal animal = iteratorAnimals.next();
+                if (lifespan % 365 == 0) animal.setCurrentAge(animal.getCurrentAge() + 1);
+                //System.out.println(animal.getCurrentAge());
+                if (animal.getCurrentAge() > animal.getMaxAge() / 2) animal.foodToAdd();
                 int randomIndex = random.nextInt(foodList.size());
                 Food randomFood = foodList.get(randomIndex);
                 if (animal.isInDiet(randomFood)) {
@@ -81,8 +84,8 @@ public class Simulation {
                     animal.decreaseEnergy(randomFood);
                     //System.out.println(animal.getName().toString().toUpperCase() + " ate " + randomFood.getName() + " and lost 1 energy\n");
                 }
-                if (animal.getCurrEnergy() <= (animal.getMaxEnergy()/ 2)) System.out.println(animal.getVerse());
-                if (animal.getCurrEnergy() <= 0) {
+                //if (animal.getCurrEnergy() <= (animal.getMaxEnergy() / 2)) System.out.println(animal.getVerse());
+                if (animal.getCurrEnergy() <= 0 || animal.getCurrentAge() > animal.getMaxAge()) {
                     Statistics.updateStatistics(lifespan, animal.getName());
                     System.out.println(animal.getName().toString().toUpperCase() + " is dead");
                     iteratorAnimals.remove();

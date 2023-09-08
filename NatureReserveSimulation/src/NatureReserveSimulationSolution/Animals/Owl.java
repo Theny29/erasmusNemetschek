@@ -13,7 +13,14 @@ import NatureReserveSimulationSolution.Food.*;
 public class Owl extends Animal{
     
     public Owl() {
-        super(AnimalsRegister.Owl, 50,  new Food[]{new Food(FoodRegister.Bird, 5), new Food(FoodRegister.Mouse, 5), new Food(FoodRegister.Insect, 8)}, "UHUHH");
+        super(AnimalsRegister.Owl, 150, 25, "UHUHH");
+        diet.add(new Food(FoodRegister.Insect, 8));
+        diet.add(new Food(FoodRegister.Mouse, 5));
+    }
+    
+    @Override
+    public void foodToAdd() {
+        diet.add(new Food(FoodRegister.Bird, 5));
     }
     
 }

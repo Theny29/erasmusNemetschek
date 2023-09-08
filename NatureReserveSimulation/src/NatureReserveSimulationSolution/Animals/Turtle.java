@@ -13,7 +13,15 @@ import NatureReserveSimulationSolution.Food.*;
 public class Turtle extends Animal{
     
     public Turtle() {
-        super(AnimalsRegister.Turtle, 78, new Food[]{new Food(FoodRegister.Grass, 3), new Food(FoodRegister.Flower, 5), new Food(FoodRegister.Berry, 8)}, "MHHH");
+        super(AnimalsRegister.Turtle, 234, 150, "MHHH");
+        diet.add(new Food(FoodRegister.Berry, 8));
+        diet.add(new Food(FoodRegister.Flower, 5));
+
+    }
+    
+    @Override
+    public void foodToAdd() {
+        diet.add(new Food(FoodRegister.Grass, 3));
     }
     
 }

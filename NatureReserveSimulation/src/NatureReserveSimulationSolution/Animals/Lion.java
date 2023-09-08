@@ -13,9 +13,15 @@ import NatureReserveSimulationSolution.Food.*;
 public class Lion extends Animal{
     
     public Lion() {
-        super(AnimalsRegister.Lion, 50, new Food[]{new Food(FoodRegister.Meat, 10), new Food(FoodRegister.Mouse, 5), new Food(FoodRegister.Snake, 5)}, "GRRR");
+        super(AnimalsRegister.Lion, 150, 20, "GRRR");
+        diet.add(new Food(FoodRegister.Meat, 10));
+        diet.add(new Food(FoodRegister.Snake, 5));
     }
     
+    @Override
+    public void foodToAdd() {
+        diet.add(new Food(FoodRegister.Mouse, 5));
+    }
     
     
 }
