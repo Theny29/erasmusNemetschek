@@ -19,7 +19,7 @@ public class Crocodile extends Animal{
     }
     
     @Override
-    public void foodToAdd() {
+    public void addFood() {
         diet.add(new Food(FoodRegister.Bird, 5));
     }
        

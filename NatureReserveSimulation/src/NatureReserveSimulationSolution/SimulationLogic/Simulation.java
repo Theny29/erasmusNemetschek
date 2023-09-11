@@ -24,41 +24,56 @@ public class Simulation {
 
     public Simulation(AnimalFactory animalFactory, int numAnimals) {
         animals = animalFactory.createRandomAnimals(numAnimals);
-        food = FoodFactory.crateFood();
+        food = FoodFactory.createFood();
         statistics = new Statistics(animals.size());
     }
 
     public void runSimulation() {
-        Random random = new Random();
-
-        while (!animals.isEmpty()) {        
-            Iterator<Animal> iteratorAnimals = animals.iterator();
-            //System.out.println("DAY: " + lifespan + "\n---------------");
-            while (iteratorAnimals.hasNext()) {
-                Animal animal = iteratorAnimals.next();
-                if (lifespan % 365 == 0) animal.setCurrentAge(animal.getCurrentAge() + 1);
-                //System.out.println(animal.getCurrentAge());
-                if (animal.getCurrentAge() > animal.getMaxAge() / 2) animal.foodToAdd();
-                int randomIndex = random.nextInt(food.size());
-                Food randomFood = food.get(randomIndex);
-                if (animal.isInDiet(randomFood)) {
-                    animal.increaseEnergy(randomFood);
-                    //System.out.println(animal.getName().toString().toUpperCase() + " ate " + randomFood.getName() + " and gained " + randomFood.getNutritionValue() + " energy. ENERGY: " + animal.getCurrEnergy() + "\n");
-                } else {
-                    animal.decreaseEnergy(randomFood);
-                    //System.out.println(animal.getName().toString().toUpperCase() + " ate " + randomFood.getName() + " and lost 1 energy\n");
-                }
-                //if (animal.getCurrEnergy() <= (animal.getMaxEnergy() / 2)) System.out.println(animal.getVerse());
-                if (animal.getCurrEnergy() <= 0 || animal.getCurrentAge() > animal.getMaxAge()) {
-                    Statistics.updateStatistics(lifespan, animal.getName());
-                    System.out.println(animal.getName().toString().toUpperCase() + " is dead");
-                    iteratorAnimals.remove();
-                }
-            }
-            lifespan++;
+        while (!animals.isEmpty()) {
+            runDay();
         }
         statistics.calcAverageLifespan();
         System.out.println(statistics.toString());
+    }
+
+    private void runDay() {
+        Iterator<Animal> iteratorAnimals = animals.iterator();
+        System.out.println("DAY: " + lifespan + "\n---------------");
+        while (iteratorAnimals.hasNext()) {
+            Animal animal = iteratorAnimals.next();
+            
+            if (lifespan % 365 == 0) animal.increaseAge();
+            System.out.println(animal.getCurrentAge());
+            if (animal.getCurrentAge() > animal.getMaxAge() / 2) animal.addFood();
+            
+            feedAnimal(animal);
+            checkAnimalStatus(animal, iteratorAnimals);
+        }
+        lifespan++;
+    }
+
+    private void feedAnimal(Animal animal) {
+        Random random = new Random();
+        int randomIndex = random.nextInt(food.size());
+        Food randomFood = food.get(randomIndex);
+        if (animal.isInDiet(randomFood)) {
+            animal.increaseEnergy(randomFood);
+            System.out.println(animal.getName().toString().toUpperCase() + " ate " + randomFood.getName() + " and gained " + randomFood.getNutritionValue() + " energy. ENERGY: " + animal.getCurrEnergy() + "\n");
+        } else {
+            animal.decreaseEnergy(randomFood);
+            System.out.println(animal.getName().toString().toUpperCase() + " ate " + randomFood.getName() + " and lost 1 energy\n");
+        }
+    }
+
+    private void checkAnimalStatus(Animal animal, Iterator<Animal> iteratorAnimals) {
+        if (animal.getCurrEnergy() <= (animal.getMaxEnergy() / 2)) {
+            System.out.println(animal.getVerse());
+        }
+        if (animal.getCurrEnergy() <= 0 || animal.getCurrentAge() > animal.getMaxAge()) {
+            Statistics.updateStatistics(lifespan, animal.getName());
+            System.out.println(animal.getName().toString().toUpperCase() + " is dead");
+            iteratorAnimals.remove();
+        }
     }
 
 }

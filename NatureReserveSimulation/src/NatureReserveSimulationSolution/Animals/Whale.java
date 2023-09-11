@@ -19,7 +19,7 @@ public class Whale extends Animal{
     }
     
     @Override
-    public void foodToAdd() {
+    public void addFood() {
         diet.add(new Food(FoodRegister.Fish, 10));
     }
     

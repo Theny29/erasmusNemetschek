@@ -14,7 +14,7 @@ public class FoodFactory {
 
     private static final ArrayList<Food> food = new ArrayList<>();
 
-    public static ArrayList<Food> crateFood() {
+    public static ArrayList<Food> createFood() {
         Food meat = new Food(FoodRegister.Meat, 10);
         Food fish = new Food(FoodRegister.Fish, 10);
         Food plankton = new Food(FoodRegister.Plankton, 10);

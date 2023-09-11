@@ -10,8 +10,8 @@ package NatureReserveSimulationSolution.Food;
  */
 public class Food {
     
-    private FoodRegister name;
-    private int nutritionValue;
+    private final FoodRegister name;
+    private final int nutritionValue;
 
     public Food(FoodRegister name, int nutritionValue) {
         this.name = name;
@@ -22,16 +22,9 @@ public class Food {
         return name;
     }
 
-    public void setName(FoodRegister name) {
-        this.name = name;
-    }
 
     public int getNutritionValue() {
         return nutritionValue;
-    }
-
-    public void setNutritionValue(int nutritionValue) {
-        this.nutritionValue = nutritionValue;
     }
 
     @Override

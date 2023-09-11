@@ -19,7 +19,7 @@ public class Lion extends Animal{
     }
     
     @Override
-    public void foodToAdd() {
+    public void addFood() {
         diet.add(new Food(FoodRegister.Mouse, 5));
     }
     

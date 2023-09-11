@@ -19,7 +19,7 @@ public class Elephant extends Animal{
     }
     
     @Override
-    public void foodToAdd(){
+    public void addFood(){
         diet.add(new Food(FoodRegister.Grass, 3));
     }
     

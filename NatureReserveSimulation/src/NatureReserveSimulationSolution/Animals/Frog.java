@@ -20,7 +20,7 @@ public class Frog extends Animal{
     }
     
     @Override
-    public void foodToAdd() {
+    public void addFood() {
         diet.add(new Food(FoodRegister.Worms, 5));
     }
 }

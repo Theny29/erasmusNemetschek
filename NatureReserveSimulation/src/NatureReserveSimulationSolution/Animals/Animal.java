@@ -13,13 +13,13 @@ import java.util.ArrayList;
  */
 public abstract class Animal {
 
-    private AnimalsRegister name;
+    private final AnimalsRegister name;
     protected ArrayList<Food> diet;
-    private int maxEnergy;
+    private final int maxEnergy;
     private int currEnergy;
-    private String verse;
+    private final String verse;
     private int currentAge;
-    private int maxAge;
+    private final int maxAge;
 
     public Animal(AnimalsRegister name, int maxEnergy, int maxAge, String verse) {
         this.name = name;
@@ -86,6 +86,10 @@ public abstract class Animal {
         setCurrEnergy(currEnergy - 1);
     }
     
-    public abstract void foodToAdd();
+    public void increaseAge() {
+        setCurrentAge(currentAge + 1);
+    }
+    
+    public abstract void addFood();
 
 }
