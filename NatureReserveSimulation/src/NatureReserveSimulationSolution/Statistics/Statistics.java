@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Erasmus1
+ * @author Daniele Perottoni
  */
 public final class Statistics {
     
@@ -27,30 +27,6 @@ public final class Statistics {
         this.maximum = Integer.MIN_VALUE;
         this.numAnimals = numAnimals;
         this.lifespanStorage = new ArrayList<>();
-    }
-
-    public int getMinimum() {
-        return minimum;
-    }
-
-    public void setMinimum(int minimum) {
-        this.minimum = minimum;
-    }
-
-    public int getMaximum() {
-        return maximum;
-    }
-
-    public void setMaximum(int maximum) {
-        this.maximum = maximum;
-    }
-
-    public double getAverage() {
-        return average;
-    }
-
-    public void setAverage(double average) {
-        this.average = average;
     }
     
     public static void updateStatistics(int lifespan, AnimalsRegister animal) {
@@ -71,7 +47,7 @@ public final class Statistics {
     public void calcAverageLifespan() {
         int sum = 0;
         for(int i = 0; i < lifespanStorage.size(); i++) sum += lifespanStorage.get(i);
-        setAverage((double) sum/this.numAnimals);
+        average = (double) sum/this.numAnimals;
     }
 
     @Override

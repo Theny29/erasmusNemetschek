@@ -5,7 +5,7 @@
 package NatureReserveSimulationSolution.SimulationLogic;
 
 import NatureReserveSimulationSolution.Animals.*;
-import NatureReserveSimulationSolution.Food.Food;
+import NatureReserveSimulationSolution.Food.*;
 import NatureReserveSimulationSolution.Statistics.Statistics;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,58 +13,22 @@ import java.util.Random;
 
 /**
  *
- * @author Erasmus1
+ * @author Daniele Perottoni
  */
 public class Simulation {
 
     private final ArrayList<Animal> animals;
+    private final ArrayList<Food> food;
     private final Statistics statistics;
     private int lifespan = 0;
 
-    public Simulation(int numAnimals) {
-        animals = new ArrayList();
-        statistics = new Statistics(numAnimals);
-        createRandomAnimals(numAnimals);
+    public Simulation(AnimalFactory animalFactory, int numAnimals) {
+        animals = animalFactory.createRandomAnimals(numAnimals);
+        food = FoodFactory.crateFood();
+        statistics = new Statistics(animals.size());
     }
 
-    private void createRandomAnimals(int numAnimals) {
-        Random random = new Random();
-        for (int i = 0; i < numAnimals; i++) {
-            int animalType = random.nextInt(8);
-            Animal animal;
-            switch (animalType) {
-                case 0:
-                    animal = new Lion();
-                    break;
-                case 1:
-                    animal = new Crocodile();
-                    break;
-                case 2:
-                    animal = new Whale();
-                    break;
-                case 3:
-                    animal = new Frog();
-                    break;
-                case 4:
-                    animal = new Shark();
-                    break;
-                case 5:
-                    animal = new Owl();
-                    break;
-                case 6:
-                    animal = new Turtle();
-                    break;
-                case 7:
-                    animal = new Elephant();
-                    break;
-                default:
-                    animal = new Lion();
-            }
-            animals.add(animal);
-        }
-    }
-
-    public void runSimulation(ArrayList<Food> foodList) {
+    public void runSimulation() {
         Random random = new Random();
 
         while (!animals.isEmpty()) {        
@@ -75,8 +39,8 @@ public class Simulation {
                 if (lifespan % 365 == 0) animal.setCurrentAge(animal.getCurrentAge() + 1);
                 //System.out.println(animal.getCurrentAge());
                 if (animal.getCurrentAge() > animal.getMaxAge() / 2) animal.foodToAdd();
-                int randomIndex = random.nextInt(foodList.size());
-                Food randomFood = foodList.get(randomIndex);
+                int randomIndex = random.nextInt(food.size());
+                Food randomFood = food.get(randomIndex);
                 if (animal.isInDiet(randomFood)) {
                     animal.increaseEnergy(randomFood);
                     //System.out.println(animal.getName().toString().toUpperCase() + " ate " + randomFood.getName() + " and gained " + randomFood.getNutritionValue() + " energy. ENERGY: " + animal.getCurrEnergy() + "\n");

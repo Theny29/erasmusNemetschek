@@ -33,18 +33,10 @@ public abstract class Animal {
 
     public AnimalsRegister getName() {
         return name;
-    }
-
-    public void setName(AnimalsRegister name) {
-        this.name = name;
-    }
+    } 
 
     public int getMaxEnergy() {
         return maxEnergy;
-    }
-
-    public void setMaxEnergy(int maxEnergy) {
-        this.maxEnergy = maxEnergy;
     }
 
     public int getCurrEnergy() {
@@ -55,20 +47,8 @@ public abstract class Animal {
         this.currEnergy = currEnergy;
     }
 
-    public ArrayList<Food> getDiet() {
-        return diet;
-    }
-
-    public void setDiet(ArrayList<Food> diet) {
-        this.diet = diet;
-    }
-
     public String getVerse() {
         return verse;
-    }
-
-    public void setVerse(String verse) {
-        this.verse = verse;
     }
 
     public int getCurrentAge() {
@@ -81,10 +61,6 @@ public abstract class Animal {
 
     public int getMaxAge() {
         return maxAge;
-    }
-
-    public void setMaxAge(int maxAge) {
-        this.maxAge = maxAge;
     }
     
     
@@ -107,7 +83,7 @@ public abstract class Animal {
     }
 
     public void decreaseEnergy(Food food) {
-        setCurrEnergy(currEnergy-1);
+        setCurrEnergy(currEnergy - 1);
     }
     
     public abstract void foodToAdd();
