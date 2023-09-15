@@ -11,29 +11,34 @@ import java.util.ArrayList;
  *
  * @author Daniele Perottoni
  */
-public abstract class Animal {
+public abstract class Animal implements iFood {
 
     private final AnimalsRegister name;
-    protected ArrayList<Food> diet;
     private final int maxEnergy;
-    private int currEnergy;
-    private final String verse;
-    private int currentAge;
     private final int maxAge;
+    private final String verse;
+    
+    protected ArrayList<String> diet;
+    private int nutritionValue;
+    private int currEnergy;
+    private int currentAge;
+    private boolean isAlive;
 
     public Animal(AnimalsRegister name, int maxEnergy, int maxAge, String verse) {
         this.name = name;
-        this.maxAge = maxAge;
         this.maxEnergy = maxEnergy;
-        this.currEnergy = maxEnergy;
+        this.maxAge = maxAge;
         this.verse = verse;
         this.diet = new ArrayList<>();
+        this.nutritionValue = maxEnergy;
+        this.currEnergy = maxEnergy;
         this.currentAge = 0;
+        this.isAlive = true;
     }
-
-    public AnimalsRegister getName() {
-        return name;
-    } 
+    
+    public String getName() {
+        return name.toString();
+    }
 
     public int getMaxEnergy() {
         return maxEnergy;
@@ -62,32 +67,60 @@ public abstract class Animal {
     public int getMaxAge() {
         return maxAge;
     }
+
+    public boolean isIsAlive() {
+        return isAlive;
+    }
+
+    public void setIsAlive(boolean isAlive) {
+        this.isAlive = isAlive;
+    }
+
+    @Override
+    public int getNutritionValue() {
+        return nutritionValue;
+    }
+    
+    @Override
+    public void setNutritionValue(int nutritionValue) {
+        this.nutritionValue = nutritionValue;
+    }
     
     
 
-    public boolean isInDiet(Food food) {
+    public boolean isInDiet(iFood food) {
         boolean isInDiet = false;
-        for (Food item : diet) {
-            if (item.equals(food)) {
+        for (String item : diet) {
+            if (item.equals(food.getName())) {
                 isInDiet = true;
             }
         }
         return isInDiet;
     }
 
-    public void increaseEnergy(Food food) {
+    public void increaseEnergy(iFood food) {
         setCurrEnergy(currEnergy + food.getNutritionValue());
         if (currEnergy > maxEnergy) {
             currEnergy = maxEnergy;
         }
     }
 
-    public void decreaseEnergy(Food food) {
+    public void starve(iFood food) {
         setCurrEnergy(currEnergy - 1);
+        if (getCurrEnergy() <= 0) die();
+    }
+    
+    public void die() {
+        setIsAlive(false);
     }
     
     public void increaseAge() {
         setCurrentAge(currentAge + 1);
+    }
+    
+    @Override
+    public void getEaten() {
+        die();
     }
     
     public abstract void addFood();

@@ -4,7 +4,7 @@
  */
 package NatureReserveSimulationSolution.Animals;
 
-import NatureReserveSimulationSolution.Food.*;
+import NatureReserveSimulationSolution.Plants.*;
 
 /**
  *
@@ -14,13 +14,13 @@ public class Frog extends Animal{
     
     public Frog() {
         super(AnimalsRegister.Frog, 129, 10, "CROAC");
-        diet.add(new Food(FoodRegister.Insect, 8));
-        diet.add(new Food(FoodRegister.seaGrass, 5));
+        diet.add(AnimalsRegister.Insect.toString());
+        diet.add(PlantsRegister.Grass.toString());
         
     }
     
     @Override
     public void addFood() {
-        diet.add(new Food(FoodRegister.Worms, 5));
+        diet.add(AnimalsRegister.Snake.toString());
     }
 }

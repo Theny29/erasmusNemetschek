@@ -4,7 +4,6 @@
  */
 package NatureReserveSimulationSolution.Statistics;
 
-import NatureReserveSimulationSolution.Animals.Animal;
 import NatureReserveSimulationSolution.Animals.AnimalsRegister;
 import java.util.ArrayList;
 
@@ -29,17 +28,17 @@ public final class Statistics {
         this.lifespanStorage = new ArrayList<>();
     }
     
-    public static void updateStatistics(int lifespan, AnimalsRegister animal) {
+    public static void updateStatistics(int lifespan, String animal) {
         lifespanStorage.add(lifespan);
         
         for (int number : lifespanStorage) {
             if (number < minimum) {
                 minimum = number;
-                firstAnimal = animal.name();
+                firstAnimal = animal;
             }
             if (number > maximum) {
                 maximum = number;
-                lastAnimal = animal.name();
+                lastAnimal = animal;
             }
         }
     }

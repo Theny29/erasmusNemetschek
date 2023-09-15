@@ -29,25 +29,25 @@ public class AnimalFactory {
                     animal = new Lion();
                     break;
                 case 1:
-                    animal = new Crocodile();
+                    animal = new Zebra();
                     break;
                 case 2:
-                    animal = new Whale();
+                    animal = new Snake();
                     break;
                 case 3:
                     animal = new Frog();
                     break;
                 case 4:
-                    animal = new Shark();
+                    animal = new Mouse();
                     break;
                 case 5:
-                    animal = new Owl();
+                    animal = new Fish();
                     break;
                 case 6:
-                    animal = new Turtle();
+                    animal = new Insect();
                     break;
                 case 7:
-                    animal = new Elephant();
+                    animal = new Bird();
                     break;
                 default:
                     animal = new Lion();

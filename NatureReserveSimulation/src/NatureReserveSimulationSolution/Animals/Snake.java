@@ -4,23 +4,21 @@
  */
 package NatureReserveSimulationSolution.Animals;
 
-import NatureReserveSimulationSolution.Food.*;
-
 /**
  *
  * @author Erasmus1
  */
-public class Whale extends Animal{
+public class Snake extends Animal{
     
-    public Whale() {
-        super(AnimalsRegister.Whale, 240, 70, "IL COCCODRILLO COME FA");
-        diet.add(new Food(FoodRegister.Plankton, 10));
-
+    public Snake() {
+        super(AnimalsRegister.Snake, 162, 70, "STRIKGNAK");
+        diet.add(AnimalsRegister.Mouse.toString());
+        diet.add(AnimalsRegister.Bird.toString());
     }
     
     @Override
     public void addFood() {
-        diet.add(new Food(FoodRegister.Fish, 10));
+        diet.add(AnimalsRegister.Frog.toString());
     }
-    
+       
 }

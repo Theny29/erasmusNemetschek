@@ -4,23 +4,24 @@
  */
 package NatureReserveSimulationSolution.Animals;
 
-import NatureReserveSimulationSolution.Food.*;
+import NatureReserveSimulationSolution.Plants.*;
 
 /**
  *
  * @author Erasmus1
  */
-public class Owl extends Animal{
+public class Bird extends Animal{
     
-    public Owl() {
-        super(AnimalsRegister.Owl, 150, 25, "UHUHH");
-        diet.add(new Food(FoodRegister.Insect, 8));
-        diet.add(new Food(FoodRegister.Mouse, 5));
+    public Bird() {
+        super(AnimalsRegister.Bird, 144, 30, "CIP CIP");
+        diet.add(PlantsRegister.Fruit.toString());
+        diet.add(AnimalsRegister.Fish.toString());
+
     }
     
     @Override
     public void addFood() {
-        diet.add(new Food(FoodRegister.Bird, 5));
+        diet.add(AnimalsRegister.Snake.toString());
     }
     
 }

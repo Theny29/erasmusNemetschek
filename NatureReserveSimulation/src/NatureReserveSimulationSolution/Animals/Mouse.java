@@ -4,24 +4,24 @@
  */
 package NatureReserveSimulationSolution.Animals;
 
-import NatureReserveSimulationSolution.Food.*;
+import NatureReserveSimulationSolution.Plants.*;
 
 /**
  *
  * @author Erasmus1
  */
-public class Turtle extends Animal{
+public class Mouse extends Animal{
     
-    public Turtle() {
-        super(AnimalsRegister.Turtle, 234, 150, "MHHH");
-        diet.add(new Food(FoodRegister.Berry, 8));
-        diet.add(new Food(FoodRegister.Flower, 5));
+    public Mouse() {
+        super(AnimalsRegister.Mouse, 240, 70, "IL COCCODRILLO COME FA");
+        diet.add(PlantsRegister.Fruit.toString());
+        diet.add(AnimalsRegister.Insect.toString());
 
     }
     
     @Override
     public void addFood() {
-        diet.add(new Food(FoodRegister.Grass, 3));
+        diet.add(PlantsRegister.Grass.toString());
     }
     
 }

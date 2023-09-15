@@ -4,23 +4,24 @@
  */
 package NatureReserveSimulationSolution.Animals;
 
-import NatureReserveSimulationSolution.Food.*;
+import NatureReserveSimulationSolution.Plants.*;
 
 /**
  *
  * @author Erasmus1
  */
-public class Crocodile extends Animal{
+public class Zebra extends Animal{
     
-    public Crocodile() {
-        super(AnimalsRegister.Crocodile, 162, 70, "STRIKGNAK");
-        diet.add(new Food(FoodRegister.Fish, 10));
-        diet.add(new Food(FoodRegister.Snake, 5));
+    public Zebra() {
+        super(AnimalsRegister.Zebra, 234, 150, "MHHH");
+        diet.add(PlantsRegister.Grass.toString());
+        diet.add(PlantsRegister.Leaf.toString());
+
     }
     
     @Override
     public void addFood() {
-        diet.add(new Food(FoodRegister.Bird, 5));
+        diet.add(PlantsRegister.Fruit.toString());
     }
-       
+    
 }

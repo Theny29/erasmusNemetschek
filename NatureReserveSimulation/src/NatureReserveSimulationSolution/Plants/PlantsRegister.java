@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Enum.java to edit this template
  */
-package NatureReserveSimulationSolution.Animals;
+package NatureReserveSimulationSolution.Plants;
 
 /**
  *
- * @author Daniele Perottoni
+ * @author Erasmus1
  */
-public enum AnimalsRegister {
-    Lion ,Snake, Bird, Zebra, Mouse, Fish, Frog, Insect
+public enum PlantsRegister {
+    Fruit, Grass, Leaf
 }

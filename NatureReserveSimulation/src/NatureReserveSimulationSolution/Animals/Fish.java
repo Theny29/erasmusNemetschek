@@ -4,23 +4,23 @@
  */
 package NatureReserveSimulationSolution.Animals;
 
-import NatureReserveSimulationSolution.Food.*;
+import NatureReserveSimulationSolution.Plants.*;
 
 /**
  *
  * @author Erasmus1
  */
-public class Elephant extends Animal{
+public class Fish extends Animal{
     
-    public Elephant() {
-        super(AnimalsRegister.Elephant, 219, 70, "PFFF");
-        diet.add(new Food(FoodRegister.Berry, 8));
-        diet.add(new Food(FoodRegister.Leaf, 5));
+    public Fish() {
+        super(AnimalsRegister.Fish, 219, 70, "PFFF");
+        diet.add(AnimalsRegister.Snake.toString());
+        diet.add(PlantsRegister.Grass.toString());
     }
     
     @Override
     public void addFood(){
-        diet.add(new Food(FoodRegister.Grass, 3));
+        diet.add(AnimalsRegister.Fish.toString());
     }
     
 }

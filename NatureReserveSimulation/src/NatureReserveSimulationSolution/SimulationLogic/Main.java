@@ -5,9 +5,8 @@
 package NatureReserveSimulationSolution.SimulationLogic;
 
 import NatureReserveSimulationSolution.Animals.*;
-import NatureReserveSimulationSolution.Animals.AnimalsRegister;
-import NatureReserveSimulationSolution.Food.Food;
-import NatureReserveSimulationSolution.Food.FoodRegister;
+import NatureReserveSimulationSolution.Plants.Plant;
+import NatureReserveSimulationSolution.Plants.PlantFactory;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -27,7 +26,8 @@ public class Main {
         int numAnimals = s.nextInt();*/
         
         AnimalFactory animalFactory = new AnimalFactory();
-        Simulation zooSofia = new Simulation(animalFactory, 5);
+        PlantFactory plantFactory = new PlantFactory();
+        Simulation zooSofia = new Simulation(animalFactory, plantFactory, 5, 5);
         
         zooSofia.runSimulation();
     }
