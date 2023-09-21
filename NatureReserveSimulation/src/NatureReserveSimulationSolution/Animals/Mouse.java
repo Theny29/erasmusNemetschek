@@ -13,7 +13,7 @@ import NatureReserveSimulationSolution.Plants.*;
 public class Mouse extends Animal{
     
     public Mouse() {
-        super(AnimalsRegister.Mouse, 240, 70, "IL COCCODRILLO COME FA");
+        super(AnimalsRegister.Mouse, 150, 4, "Mi Ci Pi");
         diet.add(PlantsRegister.Fruit.toString());
         diet.add(AnimalsRegister.Insect.toString());
 

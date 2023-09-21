@@ -11,7 +11,7 @@ package NatureReserveSimulationSolution.Plants;
 public class Fruit extends Plant {
 
     public Fruit() {
-        super(PlantsRegister.Fruit, 5, 40);
+        super(PlantsRegister.Fruit, 40);
     }
     
     @Override

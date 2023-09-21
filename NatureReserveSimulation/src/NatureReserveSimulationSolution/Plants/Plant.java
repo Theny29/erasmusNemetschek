@@ -16,9 +16,9 @@ public abstract class Plant implements iFood {
     private int nutritionValue;
     private final int maxNutritionalValue;
 
-    public Plant(PlantsRegister name, int nutritionValue, int maxNutritionalValue) {
+    public Plant(PlantsRegister name, int maxNutritionalValue) {
         this.name = name;
-        this.nutritionValue = nutritionValue;
+        this.nutritionValue = maxNutritionalValue;
         this.maxNutritionalValue = maxNutritionalValue;
     }
 

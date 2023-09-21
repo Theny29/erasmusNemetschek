@@ -8,8 +8,8 @@ import NatureReserveSimulationSolution.Plants.*;
 import NatureReserveSimulationSolution.Animals.*;
 import NatureReserveSimulationSolution.Food.iFood;
 import NatureReserveSimulationSolution.Statistics.Statistics;
+import NatureReserveSimulationTest.UI.UIService;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
 /**
@@ -22,15 +22,17 @@ public class Simulation {
     private final ArrayList<Plant> plants;
     private final ArrayList<iFood> allFoods;
     private final Statistics statistics;
+    private UIService uiService;
     private int lifespan = 0;
 
-    public Simulation(AnimalFactory animalFactory, PlantFactory plantFactory, int numAnimals, int numPlants) {
+    public Simulation(AnimalFactory animalFactory, PlantFactory plantFactory, int numAnimals, int numPlants, UIService uiService) {
         this.animals = animalFactory.createRandomAnimals(numAnimals);
         this.plants = plantFactory.createRandomPlants(numPlants);
         this.allFoods = combineArrays(animals, plants);
+        this.uiService = uiService;
         statistics = new Statistics(animals.size());
     }
-    
+
     private ArrayList<iFood> combineArrays(ArrayList<Animal> animals, ArrayList<Plant> plants) {
         ArrayList<iFood> foods = new ArrayList<>();
         foods.addAll(animals);
@@ -39,7 +41,10 @@ public class Simulation {
     }
 
     public void runSimulation() {
-        while (!animals.isEmpty()) {
+        for (int i = 0; i < allFoods.size(); i++) {
+            System.out.println(allFoods.get(i).getName() + " " + allFoods.get(i).getNutritionValue());
+        }
+        while (animals.stream().anyMatch(Animal::isIsAlive)) {
             runDay();
         }
         statistics.calcAverageLifespan();
@@ -47,63 +52,84 @@ public class Simulation {
     }
 
     private void runDay() {
-        Iterator<Animal> iteratorAnimals = animals.iterator();
-        System.out.println("DAY: " + lifespan + "\n---------------");
-        while (iteratorAnimals.hasNext()) {
-            Animal animal = iteratorAnimals.next();            
-            feedAnimal(animal);
-            checkAnimalStatus(animal, iteratorAnimals);
+        if (lifespan % 365 == 0) {
+            System.out.println("----------");
+            System.out.println("YEAR: " + (lifespan / 356));
+            System.out.println("----------");
+            uiService.displaySummary(lifespan / 356, lifespan, lifespan);
+            uiService.displayDetails(animals);
+
+        }
+        for (Animal animal : animals) {
+            if (animal.isIsAlive()) {
+                feedAnimal(animal);
+                checkAnimalStatus(animal);
+            }
         }
         lifespan++;
         regeneratesPlants();
     }
 
     private void feedAnimal(Animal animal) {
-        Random random = new Random();
-        int randomIndex = random.nextInt(allFoods.size());
-        iFood randomFood = allFoods.get(randomIndex);
-        if (animal.isInDiet(randomFood)) {
-            animal.increaseEnergy(randomFood);
-            System.out.println(animal.getName().toUpperCase() + " ate " + randomFood.getName() + " and gained " + randomFood.getNutritionValue() + " energy. ENERGY: " + animal.getCurrEnergy() + "\n");
+        iFood randomFood = getRandomFood(animal);
+        if (animal.isInDiet(randomFood) && (randomFood.getNutritionValue() > 0)) {
+            animal.increaseEnergy(randomFood.getNutritionValue());
+            System.out.print(animal.getName().toUpperCase() + " ate " + randomFood.getName() + ". ENERGY: " + animal.getCurrEnergy() + "\n");
             checkRandomFood(randomFood, animal);
         } else {
-            animal.starve(randomFood);
-            System.out.println(animal.getName().toUpperCase() + " ate " + randomFood.getName() + " and lost 1 energy\n");
+            animal.starve();
+            System.out.print(animal.getName().toUpperCase() + " didn't eat " + randomFood.getName() + " and lost 1 energy\n");
         }
     }
-    
+
+    private iFood getRandomFood(Animal animal) {
+        Random random = new Random();
+        iFood selectedFood = null;
+        while (selectedFood == null || selectedFood == animal) {
+            int randomIndex = random.nextInt(allFoods.size());
+            selectedFood = allFoods.get(randomIndex);
+        }
+        return selectedFood;
+    }
+
     private void checkRandomFood(iFood randomFood, Animal animal) {
         if (randomFood instanceof Animal) {
             if ((animal.getMaxEnergy() - animal.getCurrEnergy()) > randomFood.getNutritionValue()) {
-                allFoods.remove(randomFood);
+                randomFood.setNutritionValue(0);
             } else {
                 randomFood.setNutritionValue(animal.getMaxEnergy() - animal.getCurrEnergy());
             }
-            animal.setIsAlive(false);
-        } else {
+            for (Animal findAnimal : animals) {
+                if (findAnimal.equals(randomFood)) {
+                    Statistics.updateStatistics(lifespan, findAnimal.getName());
+                    findAnimal.getEaten();
+                }
+            }
+        } else if (randomFood instanceof Plant) {
             randomFood.getEaten();
         }
     }
 
-    private void checkAnimalStatus(Animal animal, Iterator<Animal> iteratorAnimals) {
-        if (lifespan % 365 == 0) animal.increaseAge();
-        System.out.println(animal.getCurrentAge());
-        if (animal.getCurrentAge() > animal.getMaxAge() / 2) animal.addFood();
-
-        if (animal.getCurrEnergy() <= (animal.getMaxEnergy() / 2)) {
-            System.out.println(animal.getVerse());
+    private void checkAnimalStatus(Animal animal) {
+        if (lifespan % 365 == 0) {
+            animal.increaseAge();
         }
-        checkDead(animal, iteratorAnimals);
+
+        if (animal.getCurrentAge() > animal.getMaxAge() / 2) {
+            animal.addFood();
+        }
+
+        checkDead(animal);
     }
-    
-    private void checkDead(Animal animal, Iterator<Animal> iteratorAnimals) {
+
+    private void checkDead(Animal animal) {
         if (animal.getCurrEnergy() <= 0 || animal.getCurrentAge() > animal.getMaxAge()) {
             Statistics.updateStatistics(lifespan, animal.getName());
             System.out.println(animal.getName().toUpperCase() + " is dead");
-            iteratorAnimals.remove();
+            animal.die();
         }
     }
-    
+
     private void regeneratesPlants() {
         for (iFood food : allFoods) {
             if (food instanceof Plant) {

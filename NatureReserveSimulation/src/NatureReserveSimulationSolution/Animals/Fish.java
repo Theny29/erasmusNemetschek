@@ -13,7 +13,7 @@ import NatureReserveSimulationSolution.Plants.*;
 public class Fish extends Animal{
     
     public Fish() {
-        super(AnimalsRegister.Fish, 219, 70, "PFFF");
+        super(AnimalsRegister.Fish, 150, 150, "MHHH");
         diet.add(AnimalsRegister.Snake.toString());
         diet.add(PlantsRegister.Grass.toString());
     }

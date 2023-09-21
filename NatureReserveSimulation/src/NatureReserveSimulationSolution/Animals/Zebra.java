@@ -13,7 +13,7 @@ import NatureReserveSimulationSolution.Plants.*;
 public class Zebra extends Animal{
     
     public Zebra() {
-        super(AnimalsRegister.Zebra, 234, 150, "MHHH");
+        super(AnimalsRegister.Zebra, 150, 25, "STRIKGNAK");
         diet.add(PlantsRegister.Grass.toString());
         diet.add(PlantsRegister.Leaf.toString());
 

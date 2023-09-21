@@ -11,7 +11,7 @@ package NatureReserveSimulationSolution.Plants;
 public class Grass extends Plant {
 
     public Grass() {
-        super(PlantsRegister.Grass, 5, 20);
+        super(PlantsRegister.Grass, 20);
     }
     
     @Override

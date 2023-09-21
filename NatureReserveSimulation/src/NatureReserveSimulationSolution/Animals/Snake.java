@@ -11,7 +11,7 @@ package NatureReserveSimulationSolution.Animals;
 public class Snake extends Animal{
     
     public Snake() {
-        super(AnimalsRegister.Snake, 162, 70, "STRIKGNAK");
+        super(AnimalsRegister.Snake, 150, 40, "PSSS");
         diet.add(AnimalsRegister.Mouse.toString());
         diet.add(AnimalsRegister.Bird.toString());
     }

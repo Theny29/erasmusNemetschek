@@ -5,6 +5,7 @@
 package NatureReserveSimulationSolution.Animals;
 
 import NatureReserveSimulationSolution.Food.*;
+import NatureReserveSimulationSolution.Statistics.Statistics;
 import java.util.ArrayList;
 
 /**
@@ -98,15 +99,14 @@ public abstract class Animal implements iFood {
         return isInDiet;
     }
 
-    public void increaseEnergy(iFood food) {
-        setCurrEnergy(currEnergy + food.getNutritionValue());
-        if (currEnergy > maxEnergy) {
-            currEnergy = maxEnergy;
-        }
+    public void increaseEnergy(int energy) {
+        setCurrEnergy(currEnergy + energy);
+        if (currEnergy > maxEnergy) currEnergy = maxEnergy;
     }
 
-    public void starve(iFood food) {
+    public void starve() {
         setCurrEnergy(currEnergy - 1);
+        if (getCurrEnergy() <= (getMaxEnergy() / 2)) System.out.print(getVerse() + " ");
         if (getCurrEnergy() <= 0) die();
     }
     

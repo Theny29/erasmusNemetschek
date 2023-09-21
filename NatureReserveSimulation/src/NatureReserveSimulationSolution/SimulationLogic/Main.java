@@ -5,10 +5,11 @@
 package NatureReserveSimulationSolution.SimulationLogic;
 
 import NatureReserveSimulationSolution.Animals.*;
-import NatureReserveSimulationSolution.Plants.Plant;
 import NatureReserveSimulationSolution.Plants.PlantFactory;
-import java.util.ArrayList;
+import NatureReserveSimulationTest.UI.*;
+import java.util.HashMap;
 import java.util.Scanner;
+import java.util.function.Supplier;
 
 /**
  *
@@ -25,9 +26,21 @@ public class Main {
         System.out.println("How many animals do you want in your nature reserve?");
         int numAnimals = s.nextInt();*/
         
-        AnimalFactory animalFactory = new AnimalFactory();
+        HashMap<String, Supplier<Animal>> animalMap = new HashMap<>();
+        
+        animalMap.put("lion", () -> new Lion());
+        animalMap.put("snake", () -> new Snake());
+        animalMap.put("zebra", () -> new Zebra());
+        animalMap.put("mouse", () -> new Mouse());
+        animalMap.put("bird", () -> new Bird());
+        animalMap.put("frog", () -> new Frog());
+        animalMap.put("fish", () -> new Fish());
+        animalMap.put("insect", () -> new Insect());
+        
+        AnimalFactory animalFactory = new AnimalFactory(animalMap);
         PlantFactory plantFactory = new PlantFactory();
-        Simulation zooSofia = new Simulation(animalFactory, plantFactory, 5, 5);
+        UIService uiService = new ConsoleUIService();
+        Simulation zooSofia = new Simulation(animalFactory, plantFactory, 5, 2, uiService);
         
         zooSofia.runSimulation();
     }

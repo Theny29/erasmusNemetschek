@@ -13,9 +13,11 @@ import NatureReserveSimulationSolution.Plants.*;
 public class Insect extends Animal{
     
     public Insect() {
-        super(AnimalsRegister.Insect, 150, 25, "UHUHH");
+        super(AnimalsRegister.Insect, 150, 20, "BZZZ");
         diet.add(PlantsRegister.Leaf.toString());
         diet.add(PlantsRegister.Fruit.toString());
+        diet.add(AnimalsRegister.Insect.toString());
+
     }
     
     @Override

@@ -5,7 +5,9 @@
 package NatureReserveSimulationSolution.Animals;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
+import java.util.function.Supplier;
 
 /**
  *
@@ -13,47 +15,28 @@ import java.util.Random;
  */
 public class AnimalFactory {
     
-    private final ArrayList<Animal> animals;
+    private HashMap<String, Supplier<Animal>> animalMap;
 
-    public AnimalFactory() {
-        this.animals = new ArrayList<>();
+    public AnimalFactory(HashMap<String, Supplier<Animal>> animalMap) {
+        this.animalMap = animalMap;
     }
 
     public ArrayList<Animal> createRandomAnimals(int numAnimals) {
-        Random random = new Random();
+        ArrayList<Animal> animals = new ArrayList<>();
+
         for (int i = 0; i < numAnimals; i++) {
-            int animalType = random.nextInt(8);
-            Animal animal;
-            switch (animalType) {
-                case 0:
-                    animal = new Lion();
-                    break;
-                case 1:
-                    animal = new Zebra();
-                    break;
-                case 2:
-                    animal = new Snake();
-                    break;
-                case 3:
-                    animal = new Frog();
-                    break;
-                case 4:
-                    animal = new Mouse();
-                    break;
-                case 5:
-                    animal = new Fish();
-                    break;
-                case 6:
-                    animal = new Insect();
-                    break;
-                case 7:
-                    animal = new Bird();
-                    break;
-                default:
-                    animal = new Lion();
-            }
-            animals.add(animal);
+            Object[] animalNames = animalMap.keySet().toArray();
+
+            Random random = new Random();
+            int randomIndex = random.nextInt(animalNames.length);
+
+            String selectedAnimalName = (String) animalNames[randomIndex];
+
+            Supplier<Animal> animalSupplier = animalMap.get(selectedAnimalName);
+
+            animals.add(animalSupplier.get());
         }
+
         return animals;
     }
 }

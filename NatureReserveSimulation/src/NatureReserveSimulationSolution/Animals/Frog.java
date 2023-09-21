@@ -13,7 +13,7 @@ import NatureReserveSimulationSolution.Plants.*;
 public class Frog extends Animal{
     
     public Frog() {
-        super(AnimalsRegister.Frog, 129, 10, "CROAC");
+        super(AnimalsRegister.Frog, 150, 12, "CROAC");
         diet.add(AnimalsRegister.Insect.toString());
         diet.add(PlantsRegister.Grass.toString());
         

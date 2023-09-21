@@ -13,7 +13,7 @@ import NatureReserveSimulationSolution.Plants.*;
 public class Bird extends Animal{
     
     public Bird() {
-        super(AnimalsRegister.Bird, 144, 30, "CIP CIP");
+        super(AnimalsRegister.Bird, 150, 80, "CIP CIP");
         diet.add(PlantsRegister.Fruit.toString());
         diet.add(AnimalsRegister.Fish.toString());
 
