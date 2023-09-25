@@ -40,7 +40,7 @@ public class Main {
         AnimalFactory animalFactory = new AnimalFactory(animalMap);
         PlantFactory plantFactory = new PlantFactory();
         UIService uiService = new ConsoleUIService();
-        Simulation zooSofia = new Simulation(animalFactory, plantFactory, 5, 2, uiService);
+        Simulation zooSofia = new Simulation(animalFactory, plantFactory, 5, 5, uiService);
         
         zooSofia.runSimulation();
     }
