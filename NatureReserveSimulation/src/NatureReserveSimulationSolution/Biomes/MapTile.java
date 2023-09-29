@@ -24,4 +24,30 @@ public class MapTile {
         this.yCoordinate = yCoordinate;
         this.animals = new ArrayList<>();
     }
+    
+    public List<MapTile> getAdjacentTiles(MapTile[][] mapGrid) {
+        List<MapTile> adjacentTiles = new ArrayList<>();
+
+        int width = mapGrid.length;
+        int height = mapGrid[0].length;
+
+        if (isValid(xCoordinate - 1, yCoordinate, width, height)) {
+            adjacentTiles.add(mapGrid[xCoordinate - 1][yCoordinate]);
+        }
+        if (isValid(xCoordinate + 1, yCoordinate, width, height)) {
+            adjacentTiles.add(mapGrid[xCoordinate + 1][yCoordinate]);
+        }
+        if (isValid(xCoordinate, yCoordinate - 1, width, height)) {
+            adjacentTiles.add(mapGrid[xCoordinate][yCoordinate - 1]);
+        }
+        if (isValid(xCoordinate, yCoordinate + 1, width, height)) {
+            adjacentTiles.add(mapGrid[xCoordinate][yCoordinate + 1]);
+        }
+
+        return adjacentTiles;
+    }
+
+    private boolean isValid(int x, int y, int width, int height) {
+        return x >= 0 && x < width && y >= 0 && y < height;
+    }
 }

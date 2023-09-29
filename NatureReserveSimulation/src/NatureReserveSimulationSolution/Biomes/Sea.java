@@ -4,8 +4,9 @@
  */
 package NatureReserveSimulationSolution.Biomes;
 
-import NatureReserveSimulationSolution.Animals.Animal;
-import java.util.ArrayList;
+import NatureReserveSimulationSolution.Animals.AnimalsRegister;
+import NatureReserveSimulationSolution.Plants.PlantsRegister;
+import java.util.Arrays;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 public class Sea extends Biome {
 
     public Sea() {
-        super("Sea ", currentAnimals, supportedAnimals, supportedFood);
+        super("Sea", Arrays.asList(AnimalsRegister.Fish.toString(), AnimalsRegister.Frog.toString(), AnimalsRegister.Snake.toString()), Arrays.asList(PlantsRegister.Grass.toString(), PlantsRegister.Fruit.toString()));
     }
     
 }

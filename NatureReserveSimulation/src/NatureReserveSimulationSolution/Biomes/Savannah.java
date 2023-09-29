@@ -4,8 +4,9 @@
  */
 package NatureReserveSimulationSolution.Biomes;
 
-import NatureReserveSimulationSolution.Animals.Animal;
-import java.util.ArrayList;
+import NatureReserveSimulationSolution.Animals.AnimalsRegister;
+import NatureReserveSimulationSolution.Plants.PlantsRegister;
+import java.util.Arrays;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 public class Savannah extends Biome {
 
     public Savannah() {
-        super("Savannah", currentAnimals, Arrays.asList(AnimalsRegister.Lion), supportedFood);
+        super("Savannah", Arrays.asList(AnimalsRegister.Lion.toString(), AnimalsRegister.Zebra.toString(), AnimalsRegister.Mouse.toString(), AnimalsRegister.Insect.toString()), Arrays.asList(PlantsRegister.Leaf.toString(), PlantsRegister.Grass.toString()));
     }
     
 }

@@ -5,6 +5,7 @@
 package NatureReserveSimulationSolution.Biomes;
 
 import NatureReserveSimulationSolution.Animals.AnimalsRegister;
+import NatureReserveSimulationSolution.Plants.PlantsRegister;
 import java.util.Arrays;
 
 /**
@@ -14,7 +15,7 @@ import java.util.Arrays;
 public class Forest extends Biome {
 
     public Forest() {
-        super("Forest", currentAnimals, Arrays.asList(AnimalsRegister.Deer, AnimalsRegister.Wolf), supportedFood);
+        super("Forest", Arrays.asList(AnimalsRegister.Bird.toString(), AnimalsRegister.Frog.toString(), AnimalsRegister.Insect.toString(), AnimalsRegister.Mouse.toString(), AnimalsRegister.Snake.toString()), Arrays.asList(PlantsRegister.Fruit.toString(), PlantsRegister.Leaf.toString()));
     }
     
 }

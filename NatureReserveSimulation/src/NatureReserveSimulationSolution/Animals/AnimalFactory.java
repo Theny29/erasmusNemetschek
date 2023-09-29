@@ -4,8 +4,10 @@
  */
 package NatureReserveSimulationSolution.Animals;
 
+import NatureReserveSimulationSolution.Biomes.Biome;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 
@@ -14,29 +16,28 @@ import java.util.function.Supplier;
  * @author Daniele Perottoni
  */
 public class AnimalFactory {
-    
     private HashMap<String, Supplier<Animal>> animalMap;
+    private Biome currentBiome;
 
-    public AnimalFactory(HashMap<String, Supplier<Animal>> animalMap) {
+    public AnimalFactory(HashMap<String, Supplier<Animal>> animalMap, Biome currentBiome) {
         this.animalMap = animalMap;
+        this.currentBiome = currentBiome;
     }
 
-    public ArrayList<Animal> createRandomAnimals(int numAnimals) {
+    public ArrayList<Animal> createRandomAnimals() {
+        List<String> supportedSpecies = currentBiome.getSupportedAnimals();
         ArrayList<Animal> animals = new ArrayList<>();
 
-        for (int i = 0; i < numAnimals; i++) {
-            Object[] animalNames = animalMap.keySet().toArray();
+        Random random = new Random();
 
-            Random random = new Random();
-            int randomIndex = random.nextInt(animalNames.length);
-
-            String selectedAnimalName = (String) animalNames[randomIndex];
-
+        for (int i = 0; i < 10; i++) {
+            int randomIndex = random.nextInt(supportedSpecies.size());
+            String selectedAnimalName = supportedSpecies.get(randomIndex);
             Supplier<Animal> animalSupplier = animalMap.get(selectedAnimalName);
-
             animals.add(animalSupplier.get());
         }
 
         return animals;
     }
+
 }

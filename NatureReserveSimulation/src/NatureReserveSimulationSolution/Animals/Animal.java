@@ -4,9 +4,12 @@
  */
 package NatureReserveSimulationSolution.Animals;
 
+import NatureReserveSimulationSolution.Biomes.Biome;
 import NatureReserveSimulationSolution.Food.*;
 import NatureReserveSimulationSolution.Statistics.Statistics;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -18,7 +21,7 @@ public abstract class Animal implements iFood {
     private final int maxEnergy;
     private final int maxAge;
     private final String verse;
-    
+
     protected ArrayList<String> diet;
     private int nutritionValue;
     private int currEnergy;
@@ -36,7 +39,7 @@ public abstract class Animal implements iFood {
         this.currentAge = 0;
         this.isAlive = true;
     }
-    
+
     public String getName() {
         return name.toString();
     }
@@ -81,13 +84,11 @@ public abstract class Animal implements iFood {
     public int getNutritionValue() {
         return nutritionValue;
     }
-    
+
     @Override
     public void setNutritionValue(int nutritionValue) {
         this.nutritionValue = nutritionValue;
     }
-    
-    
 
     public boolean isInDiet(iFood food) {
         boolean isInDiet = false;
@@ -101,28 +102,46 @@ public abstract class Animal implements iFood {
 
     public void increaseEnergy(int energy) {
         setCurrEnergy(currEnergy + energy);
-        if (currEnergy > maxEnergy) currEnergy = maxEnergy;
+        if (currEnergy > maxEnergy) {
+            currEnergy = maxEnergy;
+        }
     }
 
     public void starve() {
         setCurrEnergy(currEnergy - 1);
-        if (getCurrEnergy() <= (getMaxEnergy() / 2)) System.out.print(getVerse() + " ");
-        if (getCurrEnergy() <= 0) die();
+        if (getCurrEnergy() <= (getMaxEnergy() / 2)) {
+            System.out.print(getVerse() + " ");
+        }
+        if (getCurrEnergy() <= 0) {
+            die();
+        }
     }
-    
+
     public void die() {
         setIsAlive(false);
     }
-    
+
     public void increaseAge() {
         setCurrentAge(currentAge + 1);
     }
-    
+
+    public void move(Biome currentBiome, List<Biome> adjacentBiomes) {
+        if (currentBiome.supportsAnimal(getName())) {
+            if (!adjacentBiomes.isEmpty()) {
+                Random random = new Random();
+                Biome nextBiome = adjacentBiomes.get(random.nextInt(adjacentBiomes.size()));
+
+                currentBiome.removeAnimal(this);
+                nextBiome.addAnimal(this);
+            }
+        }
+    }
+
     @Override
     public void getEaten() {
         die();
     }
-    
+
     public abstract void addFood();
 
 }
